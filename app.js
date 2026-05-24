@@ -58,10 +58,7 @@ function avatarHTML(author, extraClass) {
   return `<span class="avatar${extraClass ? ' ' + extraClass : ''}" style="background:${bg}">${text}</span>`;
 }
 
-window.imgFallback = function (img, author) {
-  img.parentNode.innerHTML = avatarHTML(author);
-};
-
+// Fallbacks for small author thumbnails (side cards + sidebar)
 window.sideThumbFallback = function (img, author) {
   img.parentNode.innerHTML = avatarHTML(author);
 };
@@ -70,13 +67,12 @@ window.sidebarThumbFallback = function (img, author) {
   img.parentNode.innerHTML = avatarHTML(author);
 };
 
-function thumbnailImg(p, onerrorFn) {
+// Small circular author photo for bylines (picks + lead cards).
+// Falls back to nothing on error — the text byline still shows.
+function authorThumbHTML(p) {
   const author = p.authors[0];
-  if (p.thumbnail) {
-    const authorJson = JSON.stringify(author).replace(/"/g, '&quot;');
-    return `<img src="thumbnails/${esc(p.thumbnail)}" alt="${esc(author)}" loading="lazy" onerror="${onerrorFn}(this,${authorJson})">`;
-  }
-  return avatarHTML(author);
+  if (!p.thumbnail) return '';
+  return `<img class="byline-thumb" src="thumbnails/${esc(p.thumbnail)}" alt="${esc(author)}" loading="lazy" onerror="this.style.display='none'">`;
 }
 
 function authorLine(authors) {
@@ -99,14 +95,14 @@ function pickCardHTML(p, index) {
 
   return `<article class="pick-card ${sizeClass}">
   <a class="card-image-wrap" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    <div class="card-image">${thumbnailImg(p, 'imgFallback')}</div>
+    <div class="card-image">${avatarHTML(p.authors[0])}</div>
   </a>
   <div class="card-body">
     <span class="card-section">${esc(catLabel)}</span>
     <${tag} class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></${tag}>
     ${showSub   ? `<p class="card-subtitle">${esc(p.subtitle)}</p>` : ''}
     ${showBlurb ? `<p class="card-blurb">${esc(p.blurb)}</p>` : ''}
-    <p class="card-byline">${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
+    <p class="card-byline">${authorThumbHTML(p)}${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
   </div>
 </article>`;
 }
@@ -124,12 +120,12 @@ function leadCardHTML(p) {
     data-title="${esc(p.title.toLowerCase())}"
     data-authors="${esc(p.authors.join(' ').toLowerCase())}">
   <a class="card-image-wrap" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    <div class="card-image">${thumbnailImg(p, 'imgFallback')}</div>
+    <div class="card-image">${avatarHTML(p.authors[0])}</div>
   </a>
   <div class="card-body">
     <h3 class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h3>
     <p class="card-subtitle">${esc(p.subtitle)}</p>
-    <p class="card-byline">${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
+    <p class="card-byline">${authorThumbHTML(p)}${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
   </div>
 </article>`;
 }

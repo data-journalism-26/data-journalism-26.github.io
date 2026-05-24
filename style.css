@@ -285,6 +285,19 @@ img { display: block; max-width: 100%; }
 }
 .byline-code:hover { text-decoration-color: var(--ink); }
 
+/* Small circular author photo in pick/lead bylines */
+.byline-thumb {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+  margin-bottom: 1px; /* optical alignment with text baseline */
+}
+
 /* ── SEARCH BAND ── */
 .search-band {
   background: var(--paper);
