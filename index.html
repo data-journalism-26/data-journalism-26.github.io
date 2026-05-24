@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Journalism Portfolio — Hertie School SS 2026</title>
+  <meta name="description" content="Student data journalism projects from GRAD-E1493 at the Hertie School, Berlin, Spring 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="header-kicker">Hertie School · Berlin · Spring 2026</p>
+      <h1 class="site-title">Data Journalism<br>Portfolio</h1>
+      <p class="header-course">GRAD-E1493 · Prof. Simon Munzert</p>
+      <p class="header-intro">
+        Twenty-five students. One semester. Real data, real stories. The projects below were
+        produced in the Data Journalism course at the Hertie School — from satellite imagery
+        of war damage to migration enforcement records hidden in military reports. Each piece
+        was built, designed, and published by students working with open data and code.
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section-picks">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker picks-kicker">★ Editor's Picks</span>
+          <h2>Stories that stand out</h2>
+        </div>
+        <div class="picks-grid" id="picks-grid">
+          <p class="loading">Loading projects…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky category nav — populated by app.js -->
+    <nav class="cat-nav" id="cat-nav" aria-label="Jump to category">
+      <div class="cat-nav-inner" id="cat-nav-links"></div>
+    </nav>
+
+    <section class="section-all">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">All Projects</span>
+          <h2>Browse by topic</h2>
+        </div>
+
+        <!-- Filter / search bar -->
+        <div class="filter-bar" id="filter-bar">
+          <div class="search-wrap">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="search-input" class="search-input"
+              placeholder="Search by title or author…" autocomplete="off" spellcheck="false" aria-label="Search projects">
+            <button class="filter-clear" id="filter-clear" hidden aria-label="Clear search">×</button>
+          </div>
+          <select id="cat-filter" class="filter-select" aria-label="Filter by category">
+            <option value="">All categories</option>
+          </select>
+        </div>
+
+        <div id="categories"></div>
+        <p id="no-results" class="no-results" hidden>No projects match your search.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        <strong>GRAD-E1493: Data Journalism</strong> ·
+        Taught by Prof. Simon Munzert ·
+        Hertie School, Berlin · Spring 2026
+      </p>
+      <p>
+        <a href="https://github.com/orgs/data-journalism-26" target="_blank" rel="noopener noreferrer">
+          GitHub Organization ↗
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
