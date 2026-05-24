@@ -65,7 +65,6 @@ function avatarHTML(author) {
   return `<span class="avatar" style="background:${bg}">${text}</span>`;
 }
 
-// Global onerror handler for broken thumbnails
 window.imgFallback = function (img, author) {
   img.parentNode.innerHTML = avatarHTML(author);
 };
@@ -73,163 +72,156 @@ window.imgFallback = function (img, author) {
 function thumbnailHTML(p) {
   const author = p.authors[0];
   if (p.thumbnail) {
-    // JSON.stringify produces double-quoted strings; encode as &quot; so they
-    // don't break the surrounding onerror="..." attribute.
     const authorJson = JSON.stringify(author).replace(/"/g, '&quot;');
     return `<img src="thumbnails/${esc(p.thumbnail)}" alt="${esc(author)}" loading="lazy" onerror="imgFallback(this,${authorJson})">`;
   }
   return avatarHTML(author);
 }
 
-function badgeHTML(p) {
-  const label = ASSIGNMENT_LABELS[p.assignment] || p.assignment;
-  return `<span class="badge badge-${esc(p.assignment)}">${esc(label)}</span>`;
-}
-
 function authorLine(authors) {
   return authors.map(esc).join(' &amp; ');
 }
 
-function pickCardHTML(p) {
+// ── Pick cards (featured section) ────────────────────────────────────────────
+
+function pickCardHTML(p, index) {
   const href = esc(projectHref(p));
-  return `
-<article class="pick-card">
-  <a class="pick-image-link" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    <div class="pick-image">${thumbnailHTML(p)}</div>
+  const sizeClass = index === 0 ? 'pick-hero' : index < 3 ? 'pick-md' : 'pick-sm';
+  const catLabel = CATEGORY_LABELS[p.category] || p.category;
+  const tag = index === 0 ? 'h2' : index < 3 ? 'h3' : 'h4';
+  const showSubtitle = index === 0;
+  const showBlurb = index < 3;
+  const codeLink = `<a href="${esc(p.repo)}" class="byline-code" target="_blank" rel="noopener noreferrer">Code ↗</a>`;
+  const liveLink = p.url
+    ? ` · <a href="${esc(p.url)}" class="byline-code" target="_blank" rel="noopener noreferrer">Story ↗</a>`
+    : '';
+
+  return `<article class="pick-card ${sizeClass}">
+  <a class="card-image-wrap" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+    <div class="card-image">${thumbnailHTML(p)}</div>
   </a>
-  <div class="pick-body">
-    <div class="pick-badges">
-      <span class="pick-gold">★ Editor's Pick</span>
-      ${badgeHTML(p)}
-    </div>
-    <h3 class="pick-title">
-      <a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>
-    </h3>
-    <p class="pick-subtitle">${esc(p.subtitle)}</p>
-    <p class="pick-blurb">${esc(p.blurb)}</p>
-    <p class="pick-authors">By ${authorLine(p.authors)}</p>
-    <div class="pick-links">
-      ${p.url
-        ? `<a class="btn-primary" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Read the story →</a>`
-        : ''}
-      <a class="btn-secondary" href="${esc(p.repo)}" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </div>
+  <div class="card-body">
+    <span class="card-section">${esc(catLabel)}</span>
+    <${tag} class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></${tag}>
+    ${showSubtitle ? `<p class="card-subtitle">${esc(p.subtitle)}</p>` : ''}
+    ${showBlurb ? `<p class="card-blurb">${esc(p.blurb)}</p>` : ''}
+    <p class="card-byline">${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
   </div>
-</article>`.trim();
+</article>`;
 }
 
-function projectCardHTML(p) {
+// ── Story cards (topic sections) ──────────────────────────────────────────────
+
+function storyCardHTML(p) {
   const href = esc(projectHref(p));
-  return `
-<article class="project-card">
-  <a class="proj-image-link" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    <div class="proj-image">${thumbnailHTML(p)}</div>
+  const assignLabel = ASSIGNMENT_LABELS[p.assignment] || p.assignment;
+  const codeLink = `<a href="${esc(p.repo)}" class="byline-code" target="_blank" rel="noopener noreferrer">Code ↗</a>`;
+  const liveLink = p.url
+    ? ` · <a href="${esc(p.url)}" class="byline-code" target="_blank" rel="noopener noreferrer">Story ↗</a>`
+    : '';
+
+  return `<article class="story-card" data-title="${esc(p.title.toLowerCase())}" data-authors="${esc(p.authors.join(' ').toLowerCase())}">
+  <a class="card-image-wrap" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+    <div class="card-image">${thumbnailHTML(p)}</div>
   </a>
-  <div class="proj-body">
-    ${badgeHTML(p)}
-    <h4 class="proj-title">
-      <a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>
-    </h4>
-    <p class="proj-subtitle">${esc(p.subtitle)}</p>
-    <p class="proj-authors">By ${authorLine(p.authors)}</p>
-    <div class="proj-links">
-      ${p.url
-        ? `<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Read →</a>`
-        : ''}
-      <a class="proj-gh" href="${esc(p.repo)}" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </div>
+  <div class="card-body">
+    <h4 class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h4>
+    <p class="card-subtitle">${esc(p.subtitle)}</p>
+    <p class="card-byline">${authorLine(p.authors)} · ${esc(assignLabel)} · ${codeLink}${liveLink}</p>
   </div>
-</article>`.trim();
+</article>`;
 }
 
-// ── Sticky category nav ──────────────────────────────────────────────────────
+// ── Sticky top nav ────────────────────────────────────────────────────────────
 
-function buildCatNav(categoryKeys) {
-  const navLinks = document.getElementById('cat-nav-links');
-  navLinks.innerHTML = categoryKeys
-    .map(key => `<a class="cat-nav-link" href="#cat-${key}" data-cat="${key}">${esc(CATEGORY_LABELS[key])}</a>`)
+function buildNav(presentKeys) {
+  const navLinks = document.getElementById('nav-links');
+
+  const links = [
+    { label: 'Featured', href: '#featured' },
+    ...presentKeys.map(key => ({
+      label: CATEGORY_LABELS[key],
+      href: `#cat-${key}`,
+      key,
+    })),
+    { label: 'About', href: '#about' },
+  ];
+
+  navLinks.innerHTML = links
+    .map(l => `<a class="nav-link" href="${l.href}"${l.key ? ` data-cat="${l.key}"` : ''}>${esc(l.label)}</a>`)
     .join('');
 
-  // Smooth-scroll with sticky-nav offset on click
+  // Smooth scroll with nav-height offset
   navLinks.addEventListener('click', e => {
-    const link = e.target.closest('.cat-nav-link');
+    const link = e.target.closest('.nav-link');
     if (!link) return;
     e.preventDefault();
-    const target = document.getElementById('cat-' + link.dataset.cat);
+    const target = document.querySelector(link.getAttribute('href'));
     if (!target) return;
-    const navH = document.getElementById('cat-nav').offsetHeight;
-    const top = target.getBoundingClientRect().top + window.scrollY - navH - 12;
+    const navH = document.getElementById('top-nav').offsetHeight;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
     window.scrollTo({ top, behavior: 'smooth' });
   });
 
-  // Highlight the nav link for the section currently in view
+  // Active link highlighting via IntersectionObserver
+  const allAnchors = [
+    document.getElementById('featured'),
+    ...presentKeys.map(k => document.getElementById(`cat-${k}`)),
+    document.getElementById('about'),
+  ].filter(Boolean);
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const key = entry.target.dataset.category;
-      navLinks.querySelectorAll('.cat-nav-link').forEach(l => l.classList.remove('active'));
-      const active = navLinks.querySelector(`[data-cat="${key}"]`);
+      const id = entry.target.id;
+      const href = id === 'featured' || id === 'about' ? `#${id}` : `#cat-${entry.target.dataset.category}`;
+      navLinks.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      const active = navLinks.querySelector(`[href="${href}"]`);
       if (active) {
         active.classList.add('active');
-        // Keep the active link scrolled into view inside the nav
         active.scrollIntoView({ block: 'nearest', inline: 'center' });
       }
     });
   }, { rootMargin: '-5% 0px -75% 0px' });
 
-  document.querySelectorAll('.category-section').forEach(s => observer.observe(s));
+  allAnchors.forEach(el => observer.observe(el));
 }
 
-// ── Search / category filter ─────────────────────────────────────────────────
+// ── Search ────────────────────────────────────────────────────────────────────
 
-function setupFilter(categoryKeys) {
-  const select = document.getElementById('cat-filter');
-  select.innerHTML =
-    '<option value="">All categories</option>' +
-    categoryKeys.map(k => `<option value="${k}">${esc(CATEGORY_LABELS[k])}</option>`).join('');
-
-  const searchInput = document.getElementById('search-input');
-  const clearBtn    = document.getElementById('filter-clear');
-  const noResults   = document.getElementById('no-results');
+function setupSearch() {
+  const input    = document.getElementById('search-input');
+  const clearBtn = document.getElementById('search-clear');
+  const noResults = document.getElementById('no-results');
 
   function applyFilter() {
-    const query  = searchInput.value.toLowerCase().trim();
-    const catKey = select.value;
-    clearBtn.hidden = !query && !catKey;
+    const query = input.value.toLowerCase().trim();
+    clearBtn.hidden = !query;
 
     let totalVisible = 0;
 
     for (const section of document.querySelectorAll('.category-section')) {
-      const sectionCat = section.dataset.category;
-      const catMatch = !catKey || sectionCat === catKey;
       let sectionVisible = 0;
-
-      for (const card of section.querySelectorAll('.project-card')) {
-        const title  = card.querySelector('.proj-title')?.textContent.toLowerCase()   ?? '';
-        const author = card.querySelector('.proj-authors')?.textContent.toLowerCase() ?? '';
-        const textMatch = !query || title.includes(query) || author.includes(query);
-        const show = catMatch && textMatch;
-        card.style.display = show ? '' : 'none';
-        if (show) sectionVisible++;
+      for (const card of section.querySelectorAll('.story-card')) {
+        const match = !query
+          || card.dataset.title.includes(query)
+          || card.dataset.authors.includes(query);
+        card.style.display = match ? '' : 'none';
+        if (match) sectionVisible++;
       }
-
-      section.style.display = (catMatch && sectionVisible > 0) ? '' : 'none';
+      section.style.display = sectionVisible > 0 ? '' : 'none';
       totalVisible += sectionVisible;
     }
 
     noResults.hidden = totalVisible > 0;
     if (!noResults.hidden) {
-      noResults.textContent = query
-        ? `No projects match "${query}".`
-        : 'No projects in this category.';
+      noResults.textContent = `No stories match "${query}".`;
     }
   }
 
-  searchInput.addEventListener('input', applyFilter);
-  select.addEventListener('change', applyFilter);
+  input.addEventListener('input', applyFilter);
   clearBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    select.value = '';
+    input.value = '';
     applyFilter();
   });
 }
@@ -237,11 +229,11 @@ function setupFilter(categoryKeys) {
 // ── Main render ───────────────────────────────────────────────────────────────
 
 function render(projects) {
-  // Editor's picks
-  const picks = projects.filter(p => p.editors_pick);
+  // Editor's picks — up to 9, sized hero/md/sm by index
+  const picks = projects.filter(p => p.editors_pick).slice(0, 9);
   document.getElementById('picks-grid').innerHTML = picks.map(pickCardHTML).join('\n');
 
-  // Group all projects by category (picks also appear in their category section)
+  // Group all projects by category
   const byCategory = {};
   for (const p of projects) {
     (byCategory[p.category] ??= []).push(p);
@@ -253,22 +245,21 @@ function render(projects) {
     const list  = byCategory[key];
     const label = esc(CATEGORY_LABELS[key]);
     const count = list.length;
-    return `
-<section class="category-section" id="cat-${key}" data-category="${key}">
-  <h3 class="cat-heading">
+    return `<section class="category-section" id="cat-${key}" data-category="${key}">
+  <div class="cat-heading">
     <span class="cat-label">${label}</span>
-    <span class="cat-count-badge">${count}</span>
-  </h3>
-  <div class="projects-grid">
-    ${list.map(projectCardHTML).join('\n')}
+    <span class="cat-rule" aria-hidden="true"></span>
+    <span class="cat-count">${count}</span>
   </div>
-</section>`.trim();
+  <div class="stories-grid">
+    ${list.map(storyCardHTML).join('\n')}
+  </div>
+</section>`;
   });
   document.getElementById('categories').innerHTML = sections.join('\n');
 
-  // Wire up sticky nav and search filter
-  buildCatNav(presentKeys);
-  setupFilter(presentKeys);
+  buildNav(presentKeys);
+  setupSearch();
 }
 
 fetch('projects.json')
