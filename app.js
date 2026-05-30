@@ -3,22 +3,32 @@
 const CATEGORY_LABELS = {
   'conflict':          'Conflict & Security',
   'migration':         'Migration',
-  'transport':         'Transport & Aviation',
   'public-opinion':    'Public Opinion & Polling',
   'domestic-politics': 'Domestic Politics',
   'economics':         'Economics & Trade',
   'investigation':     'Investigations',
-  'climate':           'Climate & Environment',
   'berlin':            'Berlin',
   'america':           'Oh, America',
+};
+
+// Abbreviated labels shown in the two-row mobile nav
+const CATEGORY_SHORT = {
+  'conflict':          'Conflict',
+  'migration':         'Migration',
+  'public-opinion':    'Opinion',
+  'domestic-politics': 'Politics',
+  'economics':         'Economics',
+  'investigation':     'Reports',
+  'berlin':            'Berlin',
+  'america':           'America',
 };
 
 const CATEGORY_ORDER = Object.keys(CATEGORY_LABELS);
 
 const ASSIGNMENT_LABELS = {
   'final-project': 'Final Project',
-  'data-bit-1':    'Data Bit 1',
-  'data-bit-2':    'Data Bit 2',
+  'data-bit-1':    'Short Take',
+  'data-bit-2':    'Short Take',
 };
 
 const AVATAR_PALETTE = [
@@ -196,7 +206,7 @@ function renderCategorySection(key, list) {
 </section>`;
 }
 
-// ── Sidebar (Data Bits) ───────────────────────────────────────────────────────
+// ── Sidebar (Short Takes) ─────────────────────────────────────────────────────
 
 function sidebarItemHTML(p) {
   const href        = esc(projectHref(p));
@@ -224,13 +234,13 @@ function sidebarItemHTML(p) {
 function buildSidebar(projects) {
   const sidebar = document.getElementById('data-bits-sidebar');
   if (!sidebar) return;
-  const dataBits = projects.filter(p => p.assignment !== 'final-project');
+  const shortTakes = projects.filter(p => p.assignment !== 'final-project');
   sidebar.innerHTML = `
 <div class="sidebar-header">
-  <span class="sidebar-label">Data Bits</span>
-  <p class="sidebar-desc">Short takes from the semester</p>
+  <span class="sidebar-label">Short Takes</span>
+  <p class="sidebar-desc">Focused data stories from the semester</p>
 </div>
-${dataBits.map(sidebarItemHTML).join('\n')}`;
+${shortTakes.map(sidebarItemHTML).join('\n')}`;
 }
 
 // ── Sticky top nav ────────────────────────────────────────────────────────────
@@ -239,13 +249,21 @@ function buildNav(presentKeys) {
   const navLinks = document.getElementById('nav-links');
 
   const links = [
-    { label: 'Featured', href: '#featured' },
-    ...presentKeys.map(key => ({ label: CATEGORY_LABELS[key], href: `#cat-${key}`, key })),
-    { label: 'About', href: '#about' },
+    { label: 'Featured', short: 'Featured', href: '#featured' },
+    ...presentKeys.map(key => ({
+      label: CATEGORY_LABELS[key],
+      short: CATEGORY_SHORT[key] || CATEGORY_LABELS[key],
+      href:  `#cat-${key}`,
+      key,
+    })),
+    { label: 'About', short: 'About', href: '#about' },
   ];
 
   navLinks.innerHTML = links
-    .map(l => `<a class="nav-link" href="${l.href}"${l.key ? ` data-cat="${l.key}"` : ''}>${esc(l.label)}</a>`)
+    .map(l => `<a class="nav-link" href="${l.href}"${l.key ? ` data-cat="${l.key}"` : ''}>` +
+      `<span class="nav-full">${esc(l.label)}</span>` +
+      `<span class="nav-short">${esc(l.short)}</span>` +
+      `</a>`)
     .join('');
 
   // Smooth scroll with nav-height offset
@@ -276,10 +294,7 @@ function buildNav(presentKeys) {
         : `#cat-${entry.target.dataset.category}`;
       navLinks.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
       const active = navLinks.querySelector(`[href="${href}"]`);
-      if (active) {
-        active.classList.add('active');
-        active.scrollIntoView({ block: 'nearest', inline: 'center' });
-      }
+      if (active) active.classList.add('active');
     });
   }, { rootMargin: '-5% 0px -75% 0px' });
 
@@ -335,7 +350,7 @@ function render(projects) {
   document.getElementById('categories').innerHTML =
     presentKeys.map(key => renderCategorySection(key, byCategory[key])).join('\n');
 
-  // Data bits sidebar
+  // Short Takes sidebar
   buildSidebar(projects);
 
   // Nav + search
