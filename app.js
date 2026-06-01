@@ -7,7 +7,8 @@ const CATEGORY_LABELS = {
   'domestic-politics': 'Domestic Politics',
   'economics':         'Economics & Trade',
   'investigation':     'Investigations',
-  'berlin':            'Berlin',
+  'eagle-hills':       'The Eagle Hills Files',
+  'berlin':            'Dit is Berlin',
   'america':           'Oh, America',
 };
 
@@ -19,6 +20,7 @@ const CATEGORY_SHORT = {
   'domestic-politics': 'Politics',
   'economics':         'Economics',
   'investigation':     'Reports',
+  'eagle-hills':       'Eagle Hills',
   'berlin':            'Berlin',
   'america':           'America',
 };
@@ -104,6 +106,8 @@ function authorLine(authors) {
 }
 
 // ── Featured picks grid ───────────────────────────────────────────────────────
+// The whole card is clickable: the headline link carries a stretched ::after
+// overlay (see .card-cover-link in CSS), so a click anywhere opens the story.
 
 function pickCardHTML(p, index) {
   const href      = esc(projectHref(p));
@@ -112,21 +116,15 @@ function pickCardHTML(p, index) {
   const tag       = index === 0 ? 'h2' : index < 3 ? 'h3' : 'h4';
   const showSub   = index === 0;
   const showBlurb = index < 3;
-  const codeLink  = `<a href="${esc(p.repo)}" class="byline-code" target="_blank" rel="noopener noreferrer">Code ↗</a>`;
-  const liveLink  = p.url
-    ? ` · <a href="${esc(p.url)}" class="byline-code" target="_blank" rel="noopener noreferrer">Story ↗</a>`
-    : '';
 
   return `<article class="pick-card ${sizeClass}">
-  <a class="card-image-wrap" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    <div class="card-image">${articleImgHTML(p)}</div>
-  </a>
+  <div class="card-image">${articleImgHTML(p)}</div>
   <div class="card-body">
     <span class="card-section">${esc(catLabel)}</span>
-    <${tag} class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></${tag}>
+    <${tag} class="card-headline"><a class="card-cover-link" href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></${tag}>
     ${showSub   ? `<p class="card-subtitle">${esc(p.subtitle)}</p>` : ''}
     ${showBlurb ? `<p class="card-blurb">${esc(p.blurb)}</p>` : ''}
-    <p class="card-byline">${authorThumbHTML(p)}${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
+    <p class="card-byline">${authorThumbHTML(p)}${authorLine(p.authors)}</p>
   </div>
 </article>`;
 }
@@ -134,33 +132,23 @@ function pickCardHTML(p, index) {
 // ── Category sections: lead + rail ───────────────────────────────────────────
 
 function leadCardHTML(p) {
-  const href     = esc(projectHref(p));
-  const codeLink = `<a href="${esc(p.repo)}" class="byline-code" target="_blank" rel="noopener noreferrer">Code ↗</a>`;
-  const liveLink = p.url
-    ? ` · <a href="${esc(p.url)}" class="byline-code" target="_blank" rel="noopener noreferrer">Story ↗</a>`
-    : '';
+  const href = esc(projectHref(p));
 
   return `<article class="story-lead"
     data-title="${esc(p.title.toLowerCase())}"
     data-authors="${esc(p.authors.join(' ').toLowerCase())}">
-  <a class="card-image-wrap" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    <div class="card-image">${articleImgHTML(p)}</div>
-  </a>
+  <div class="card-image">${articleImgHTML(p)}</div>
   <div class="card-body">
-    <h3 class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h3>
+    <h3 class="card-headline"><a class="card-cover-link" href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h3>
     <p class="card-subtitle">${esc(p.subtitle)}</p>
-    <p class="card-byline">${authorThumbHTML(p)}${authorLine(p.authors)} · ${codeLink}${liveLink}</p>
+    <p class="card-byline">${authorThumbHTML(p)}${authorLine(p.authors)}</p>
   </div>
 </article>`;
 }
 
 function sideCardHTML(p) {
-  const href     = esc(projectHref(p));
-  const author   = p.authors[0];
-  const codeLink = `<a href="${esc(p.repo)}" class="byline-code" target="_blank" rel="noopener noreferrer">Code ↗</a>`;
-  const liveLink = p.url
-    ? ` · <a href="${esc(p.url)}" class="byline-code" target="_blank" rel="noopener noreferrer">Story ↗</a>`
-    : '';
+  const href        = esc(projectHref(p));
+  const author      = p.authors[0];
   const assignLabel = ASSIGNMENT_LABELS[p.assignment] || p.assignment;
 
   let thumbInner;
@@ -174,12 +162,10 @@ function sideCardHTML(p) {
   return `<article class="story-side"
     data-title="${esc(p.title.toLowerCase())}"
     data-authors="${esc(p.authors.join(' ').toLowerCase())}">
-  <a class="side-thumb" href="${href}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-    ${thumbInner}
-  </a>
+  <div class="side-thumb">${thumbInner}</div>
   <div class="side-body">
-    <h4 class="card-headline"><a href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h4>
-    <p class="card-byline">${authorLine(p.authors)} · ${esc(assignLabel)} · ${codeLink}${liveLink}</p>
+    <h4 class="card-headline"><a class="card-cover-link" href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h4>
+    <p class="card-byline">${authorLine(p.authors)} · ${esc(assignLabel)}</p>
   </div>
 </article>`;
 }
@@ -187,8 +173,9 @@ function sideCardHTML(p) {
 function renderCategorySection(key, list) {
   const label = esc(CATEGORY_LABELS[key]);
   const count = list.length;
-  const lead  = list[0];
-  const sides = list.slice(1);
+  const lead  = list.find(p => p.lead) || list[0];
+  const sides = list.filter(p => p !== lead);
+  const solo  = sides.length === 0;
   const rail  = sides.length > 0
     ? `<div class="story-rail">${sides.map(sideCardHTML).join('\n')}</div>`
     : '';
@@ -199,7 +186,7 @@ function renderCategorySection(key, list) {
     <span class="cat-rule" aria-hidden="true"></span>
     <span class="cat-count">${count}</span>
   </div>
-  <div class="cat-grid">
+  <div class="cat-grid${solo ? ' cat-grid--solo' : ''}">
     ${leadCardHTML(lead)}
     ${rail}
   </div>
@@ -232,13 +219,13 @@ function sidebarItemHTML(p) {
 }
 
 function buildSidebar(projects) {
-  const sidebar = document.getElementById('data-bits-sidebar');
+  const sidebar = document.getElementById('short-takes-sidebar');
   if (!sidebar) return;
   const shortTakes = projects.filter(p => p.assignment !== 'final-project');
   sidebar.innerHTML = `
 <div class="sidebar-header">
   <span class="sidebar-label">Short Takes</span>
-  <p class="sidebar-desc">Focused data stories from the semester</p>
+  <p class="sidebar-desc">Quick reads, one idea each</p>
 </div>
 ${shortTakes.map(sidebarItemHTML).join('\n')}`;
 }
@@ -248,22 +235,20 @@ ${shortTakes.map(sidebarItemHTML).join('\n')}`;
 function buildNav(presentKeys) {
   const navLinks = document.getElementById('nav-links');
 
+  // Nav uses concise labels (the full names still appear as section
+  // headings) so all sections fit without horizontal scrolling.
   const links = [
-    { label: 'Featured', short: 'Featured', href: '#featured' },
+    { label: 'Featured', href: '#featured' },
     ...presentKeys.map(key => ({
-      label: CATEGORY_LABELS[key],
-      short: CATEGORY_SHORT[key] || CATEGORY_LABELS[key],
+      label: CATEGORY_SHORT[key] || CATEGORY_LABELS[key],
       href:  `#cat-${key}`,
       key,
     })),
-    { label: 'About', short: 'About', href: '#about' },
+    { label: 'About', href: '#about' },
   ];
 
   navLinks.innerHTML = links
-    .map(l => `<a class="nav-link" href="${l.href}"${l.key ? ` data-cat="${l.key}"` : ''}>` +
-      `<span class="nav-full">${esc(l.label)}</span>` +
-      `<span class="nav-short">${esc(l.short)}</span>` +
-      `</a>`)
+    .map(l => `<a class="nav-link" href="${l.href}"${l.key ? ` data-cat="${l.key}"` : ''}>${esc(l.label)}</a>`)
     .join('');
 
   // Smooth scroll with nav-height offset

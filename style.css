@@ -147,8 +147,6 @@ img { display: block; max-width: 100%; }
 }
 .nav-link:hover { color: var(--white); }
 .nav-link.active { color: var(--white); border-bottom-color: var(--red); }
-/* Full labels visible by default; short labels hidden */
-.nav-short { display: none; }
 
 /* ── FEATURED SECTION ── */
 .featured-section {
@@ -168,6 +166,19 @@ img { display: block; max-width: 100%; }
 /* ── PICK CARD BASE ── */
 .pick-card { display: flex; flex-direction: column; }
 
+/* ── WHOLE-CARD CLICK TARGET ──
+   The headline link stretches an invisible ::after over the whole card,
+   so a click on the image, headline, or anywhere in the element opens
+   the story. Cards must be positioned for the overlay to anchor to them. */
+.pick-card, .story-lead, .story-side { position: relative; }
+.card-cover-link { color: inherit; }
+.card-cover-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
 /* Hero: full-width, horizontal */
 .pick-hero {
   grid-column: span 6;
@@ -177,8 +188,7 @@ img { display: block; max-width: 100%; }
   padding-bottom: 2.5rem;
   border-bottom: 1px solid var(--border);
 }
-.pick-hero .card-image-wrap { width: 48%; flex-shrink: 0; }
-.pick-hero .card-image       { aspect-ratio: 4/3; }
+.pick-hero .card-image       { width: 48%; flex-shrink: 0; aspect-ratio: 4/3; }
 .pick-hero .card-body        { justify-content: center; padding-top: 0; }
 .pick-hero .card-headline    { font-size: clamp(1.7rem, 2.8vw, 2.5rem); }
 .pick-hero .card-blurb       { display: block; }
@@ -197,7 +207,6 @@ img { display: block; max-width: 100%; }
 .pick-sm .card-blurb    { display: none; }
 
 /* ── CARD IMAGE ── */
-.card-image-wrap { display: block; overflow: hidden; }
 .card-image {
   width: 100%;
   overflow: hidden;
@@ -279,14 +288,6 @@ img { display: block; max-width: 100%; }
   margin-top: auto;
   padding-top: 0.6rem;
 }
-.byline-code {
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: rgba(26,26,26,0.25);
-  transition: text-decoration-color 0.15s;
-}
-.byline-code:hover { text-decoration-color: var(--ink); }
 
 /* Small circular author photo in pick/lead bylines */
 .byline-thumb {
@@ -399,6 +400,23 @@ img { display: block; max-width: 100%; }
   align-items: start;
 }
 
+/* Solo / dedicated section (e.g. a single coherent investigation):
+   one story gets a wide, horizontal feature treatment instead of a
+   narrow column with empty space beside it. */
+.cat-grid--solo { grid-template-columns: 1fr; }
+.cat-grid--solo .story-lead {
+  flex-direction: row;
+  align-items: center;
+  gap: 0 2.5rem;
+}
+.cat-grid--solo .story-lead .card-image {
+  width: 60%;
+  flex-shrink: 0;
+  aspect-ratio: 3/2;
+}
+.cat-grid--solo .story-lead .card-body { padding-top: 0; }
+.cat-grid--solo .story-lead .card-headline { font-size: 1.9rem; }
+
 /* ── LEAD STORY CARD ── */
 .story-lead {
   display: flex;
@@ -475,18 +493,18 @@ img { display: block; max-width: 100%; }
   font-size: 0.58rem;
 }
 
-/* ── SIDEBAR (Data Bits column) ── */
+/* ── SIDEBAR (Short Takes column) ──
+   Sticky but NOT internally scrollable: an internal overflow traps the
+   mouse wheel over the column. Letting it size to its content means the
+   page scrolls naturally while the column stays pinned beside the stories. */
 .topics-sidebar {
   position: sticky;
   top: 56px;
+  align-self: start;
   background: var(--white);
   border-top: 2px solid var(--ink);
   padding-top: 0.9rem;
-  max-height: calc(100vh - 72px);
-  overflow-y: auto;
-  scrollbar-width: none;
 }
-.topics-sidebar::-webkit-scrollbar { display: none; }
 
 .sidebar-header { margin-bottom: 0.2rem; }
 .sidebar-label {
@@ -723,22 +741,17 @@ img { display: block; max-width: 100%; }
   }
   .nav-link {
     height: auto;
-    padding: 0.38rem 0.55rem;
-    font-size: 0.55rem;
+    padding: 0.38rem 0.6rem;
+    font-size: 0.6rem;
     letter-spacing: 0.07em;
-    border-bottom: none;
     border-bottom: 2px solid transparent; /* keep active indicator space */
   }
-  /* Show short labels, hide long ones */
-  .nav-full  { display: none; }
-  .nav-short { display: inline; }
 }
 
 @media (max-width: 720px) {
   .picks-grid { grid-template-columns: repeat(2, 1fr); row-gap: 2rem; }
   .pick-hero  { grid-column: span 2; flex-direction: column; gap: 0; }
-  .pick-hero .card-image-wrap { width: 100%; }
-  .pick-hero .card-image  { aspect-ratio: 16/9; }
+  .pick-hero .card-image  { width: 100%; aspect-ratio: 16/9; }
   .pick-hero .card-body   { padding-top: 0.85rem; }
   .pick-md    { grid-column: span 1; }
   .pick-sm    { grid-column: span 1; }
@@ -752,6 +765,11 @@ img { display: block; max-width: 100%; }
     border-top: 1px solid var(--border);
     padding-top: 0.5rem;
   }
+
+  /* Solo feature stacks like a normal lead on mobile */
+  .cat-grid--solo .story-lead { flex-direction: column; gap: 0; }
+  .cat-grid--solo .story-lead .card-image { width: 100%; }
+  .cat-grid--solo .story-lead .card-headline { font-size: 1.25rem; }
 
   /* Sidebar: single column */
   .topics-sidebar { grid-template-columns: 1fr; }
