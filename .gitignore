@@ -1,1 +1,5 @@
 .DS_Store
+/survey
+
+# Consent record contains personal data — keep out of the public repo
+consent.csv

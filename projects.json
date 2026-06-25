@@ -17,9 +17,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": true,
-    "thumbnail": "female-1.png",
-    "blurb": "Radar from space can see through clouds and darkness to the moment a power plant is hit. A look at how open satellite data lays bare the war on Ukraine's grid.",
-    "image": "thumbnails-visuals/elenadreyer-final.jpg"
+    "thumbnail": "elena-dreyer.png",
+    "blurb": "Six hundred and ninety-three kilometres above the Earth, a European radar satellite passes over Ukraine every twelve days. It does not see in colour; it does not need daylight or clear skies. It sends out pulses of microwaves and listens for what comes back. Over the four years since Russia's full-scale invasion, those returning signals have built up a quiet, parallel record of a war that has been fought in part against an electricity grid, strike by strike, plant by plant.",
+    "image": "thumbnails-visuals/elenadreyer-final.jpg",
+    "image_pano": "thumbnails-stories/elena-dreyer-final-pano.png",
+    "image_square": "thumbnails-stories/elena-dreyer-final-square.png"
   },
   {
     "id": "giorgio-final",
@@ -40,9 +42,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": true,
-    "thumbnail": "male-1.png",
+    "thumbnail": "giorgio-coppola.png",
     "blurb": "A storm sweeps the Central Mediterranean just as the boats push off from Libya. The story of the night the sea turned, rebuilt hour by hour.",
-    "image": "thumbnails-visuals/giorgio-final.jpg"
+    "image": "thumbnails-visuals/giorgio-final.jpg",
+    "image_pano": "thumbnails-stories/giorgio-coppola-final-pano.jpg",
+    "image_square": "thumbnails-stories/giorgio-coppola-final-square.jpg"
   },
   {
     "id": "sophia-final",
@@ -63,9 +67,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": true,
-    "thumbnail": "female-2.png",
+    "thumbnail": "sophia-hiss.png",
     "blurb": "Algeria won't share its migration figures — so its own army's weekly bulletins became the source. Inside the making of a record built from scratch.",
-    "image": "thumbnails-visuals/sophia-final.jpg"
+    "image": "thumbnails-visuals/sophia-final.jpg",
+    "image_pano": "thumbnails-stories/sophia-hiss-final-pano.jpg",
+    "image_square": "thumbnails-stories/sophia-hiss-final-square.jpg"
   },
   {
     "id": "luca-final",
@@ -86,16 +92,18 @@
     ],
     "assignment": "final-project",
     "editors_pick": true,
-    "thumbnail": "male-2.png",
+    "thumbnail": "luca-verona-vellage.png",
     "blurb": "After Russia shut its airspace, Europe's flights to Asia found a narrow new path through the Caucasus — shadowed by the GPS jamming that now follows them.",
-    "image": "thumbnails-visuals/luca-final.jpg"
+    "image": "thumbnails-visuals/luca-final.jpg",
+    "image_pano": null,
+    "image_square": null
   },
   {
     "id": "chirag-final",
     "title": "How Does an Election Forecast Model Work?",
     "subtitle": "Everyone cites the forecast. Few know what's inside.",
     "authors": [
-      "Chirag Rastogi"
+      "Chirag Ramesh"
     ],
     "url": "https://data-journalism-26.github.io/final-project-chirag_final/",
     "repo": "https://github.com/data-journalism-26/final-project-chirag_final",
@@ -109,31 +117,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": false,
-    "thumbnail": "male-3.png",
+    "thumbnail": "chirag-ramesh.png",
     "blurb": "Open up an election model and watch it work, from raw polls to a seat-by-seat call. No statistics degree required.",
-    "image": "thumbnails-visuals/chirag-final.jpg"
-  },
-  {
-    "id": "daniel-final",
-    "title": "U.S. Territorial Expansion and Native American Land Loss",
-    "subtitle": "Watch a continent change hands",
-    "authors": [
-      "Daniel Boppert"
-    ],
-    "url": "https://data-journalism-26.github.io/final-project-daniel_final/",
-    "repo": "https://github.com/data-journalism-26/final-project-daniel_final",
-    "category": "america",
-    "tags": [
-      "Native Americans",
-      "GIS",
-      "U.S. history",
-      "scrollytelling"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "male-4.png",
-    "blurb": "A moving map of how Native nations were pushed off their land as the United States grew — and a quiet challenge to the story America tells about it.",
-    "image": "thumbnails-visuals/daniel-final.jpg"
+    "image": "thumbnails-visuals/chirag-final.jpg",
+    "image_pano": "thumbnails-stories/chirag-ramesh-final-pano.png",
+    "image_square": null
   },
   {
     "id": "lou-final",
@@ -153,16 +141,18 @@
     ],
     "assignment": "final-project",
     "editors_pick": false,
-    "thumbnail": "female-4.png",
+    "thumbnail": "emma-lou-caressa.png",
     "blurb": "Five things almost everyone gets wrong about election polls, cleared up with the numbers from Germany's last vote.",
-    "image": "thumbnails-visuals/lou-final.jpg"
+    "image": "thumbnails-visuals/lou-final.jpg",
+    "image_pano": "thumbnails-stories/lou-caressa-final-pano.png",
+    "image_square": null
   },
   {
     "id": "oliver-final",
     "title": "The Changing Face of Parliament",
     "subtitle": "Who actually sits in the Bundestag?",
     "authors": [
-      "Oliver Schmid"
+      "Oliver Pollex"
     ],
     "url": "https://data-journalism-26.github.io/final-project-oliver_final/",
     "repo": "https://github.com/data-journalism-26/final-project-oliver_final",
@@ -175,16 +165,18 @@
     ],
     "assignment": "final-project",
     "editors_pick": false,
-    "thumbnail": "male-5.png",
+    "thumbnail": "oliver-pollex.png",
     "blurb": "Seventy-five years of German politics told through the people in the room — their age, gender, faith, and where they came from.",
-    "image": "thumbnails-visuals/oliver-final.jpg"
+    "image": "thumbnails-visuals/oliver-final.jpg",
+    "image_pano": null,
+    "image_square": null
   },
   {
     "id": "aishwarya-final",
     "title": "The Geography of Silence — Press Freedom in Türkiye 2015–2025",
     "subtitle": "Where the press went quiet",
     "authors": [
-      "Aishwarya Ramesh"
+      "Aishwarya Sampath"
     ],
     "url": "https://data-journalism-26.github.io/final-project-aishwarya_final/",
     "repo": "https://github.com/data-journalism-26/final-project-aishwarya_final",
@@ -197,77 +189,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": false,
-    "thumbnail": "female-5.png",
+    "thumbnail": "aishwarya-sampath.png",
     "blurb": "A decade of journalists detained, sued, and silenced across Türkiye, plotted on a single map. The geography of a slow crackdown.",
-    "image": "thumbnails-visuals/aishwarya-final.jpg"
-  },
-  {
-    "id": "skyler-final",
-    "title": "The Parallel Record: Eagle Hills Georgia Ad Investigation",
-    "subtitle": "Reading between the languages",
-    "authors": [
-      "Skyler Blake"
-    ],
-    "url": null,
-    "repo": "https://github.com/data-journalism-26/final-project-skyler_final",
-    "category": "eagle-hills",
-    "tags": [
-      "Meta ads",
-      "Georgia",
-      "real estate",
-      "investigation"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "male-6.png",
-    "blurb": "A glossy developer sells a Georgian dream in English — then quietly resells it in Russian. What thousands of ads reveal about who's really being courted.",
-    "image": "thumbnails-visuals/skyler-final.jpg"
-  },
-  {
-    "id": "nadine-final",
-    "title": "Spring on Two Wheels",
-    "subtitle": "Easier riding, deadlier roads",
-    "authors": [
-      "Nadine Daum"
-    ],
-    "url": "https://rawcdn.githack.com/data-journalism-26/final-project-nadine-final/5af0b976f36848ee365d47d85064c5304cfa48b0/spring-on-two-wheels.html",
-    "repo": "https://github.com/data-journalism-26/final-project-nadine-final",
-    "category": "berlin",
-    "tags": [
-      "cycling",
-      "pedelec",
-      "road safety",
-      "Germany",
-      "Berlin"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "female-6.png",
-    "blurb": "E-bikes put cycling within everyone's reach. So why aren't cyclists any safer? A spring-season look at the gap.",
-    "image": "thumbnails-visuals/nadine-final.jpg"
-  },
-  {
-    "id": "farhan-final",
-    "title": "Heat-Stressed India: The Seen and the Unseen",
-    "subtitle": "Where the heat hits hardest",
-    "authors": [
-      "Farhan Shaikh"
-    ],
-    "url": "https://data-journalism-26.github.io/final-project-farhan_final/",
-    "repo": "https://github.com/data-journalism-26/final-project-farhan_final",
-    "category": "investigation",
-    "tags": [
-      "India",
-      "heat",
-      "maternal health",
-      "districts",
-      "CEEW"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "male-7.png",
-    "blurb": "Across India, the fiercest heat lands on the mothers and children least able to withstand it. Mapping the districts where the danger doubles up.",
-    "image": "thumbnails-visuals/farhan-final.jpg"
+    "image": "thumbnails-visuals/aishwarya-final.jpg",
+    "image_pano": null,
+    "image_square": null
   },
   {
     "id": "leticia-xiaohan-final",
@@ -288,17 +214,19 @@
     ],
     "assignment": "final-project",
     "editors_pick": false,
-    "thumbnail": "female-7.png",
+    "thumbnail": "leticia-figueiredo-collado.png",
     "blurb": "Answer a few questions about your favourite flavour and you'll never read an election poll the same way again. A playful guide to how opinions become numbers.",
     "image": "thumbnails-visuals/leticia-xiaohan-final.jpg",
-    "lead": true
+    "lead": true,
+    "image_pano": "thumbnails-stories/leticia-xiaohan-final-pano.jpg",
+    "image_square": "thumbnails-stories/leticia-xiaohan-final-square.jpg"
   },
   {
     "id": "bjarne-final",
     "title": "Paper Money: How Not to Store Value",
     "subtitle": "Watch your savings quietly melt",
     "authors": [
-      "Bjarne Wulfes"
+      "Bjarne Schinzel"
     ],
     "url": "https://data-journalism-26.github.io/final-project-bjarne_final/",
     "repo": "https://github.com/data-journalism-26/final-project-bjarne_final",
@@ -311,53 +239,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": false,
-    "thumbnail": "male-8.png",
+    "thumbnail": "bjarne-schinzel.png",
     "blurb": "Tuck cash under the mattress and time eats it alive. A scroll-driven essay on why money is such a bad place to store value.",
-    "image": "thumbnails-visuals/bjarne-final.jpg"
-  },
-  {
-    "id": "ujwal-final",
-    "title": "The Efficiency Trap",
-    "subtitle": "The world runs through a few narrow gates",
-    "authors": [
-      "Ujwal Neethipudi"
-    ],
-    "url": "https://data-journalism-26.github.io/final-project-ujwal_final/",
-    "repo": "https://github.com/data-journalism-26/final-project-ujwal_final",
-    "category": "economics",
-    "tags": [
-      "supply chains",
-      "chokepoints",
-      "Hormuz",
-      "energy"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "male-9.png",
-    "blurb": "From the Strait of Hormuz to a single rare-earth town, modern supply chains lean on a handful of chokepoints. What happens when one shuts?",
-    "image": "thumbnails-visuals/ujwal-final.jpg"
-  },
-  {
-    "id": "anna-final",
-    "title": "Price Convergence in Europe",
-    "subtitle": "The East is catching up — at a price",
-    "authors": [
-      "Anna Jurek"
-    ],
-    "url": "https://rawcdn.githack.com/data-journalism-26/final-project-anna_final/main/index.html",
-    "repo": "https://github.com/data-journalism-26/final-project-anna_final",
-    "category": "economics",
-    "tags": [
-      "CEE",
-      "inflation",
-      "Eurostat",
-      "living standards"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "female-9.png",
-    "blurb": "Prices across Central and Eastern Europe are converging with the West. The open question is whether wages are keeping pace.",
-    "image": "thumbnails-visuals/anna-final.jpg"
+    "image": "thumbnails-visuals/bjarne-final.jpg",
+    "image_pano": "thumbnails-stories/bjarne-schinzel-final-pano.png",
+    "image_square": "thumbnails-stories/bjarne-schinzel-final-square.png"
   },
   {
     "id": "elena-m-final",
@@ -368,7 +254,7 @@
     ],
     "url": "https://data-journalism-26.github.io/final-project-elena_m_final/",
     "repo": "https://github.com/data-journalism-26/final-project-elena_m_final",
-    "category": "america",
+    "category": "economics",
     "tags": [
       "data centres",
       "electricity prices",
@@ -377,31 +263,11 @@
     ],
     "assignment": "final-project",
     "editors_pick": true,
-    "thumbnail": "female-3.png",
+    "thumbnail": "elena-murray.png",
     "blurb": "Every search and stream runs through a data centre drawing serious power. In Virginia, a test of whether your electricity bill is footing it.",
-    "image": "thumbnails-visuals/elena-m-final.jpg"
-  },
-  {
-    "id": "maria-final",
-    "title": "Food Deserts in the United States",
-    "subtitle": "A line drawn in the 1930s you can still taste",
-    "authors": [
-      "Maria Ferro"
-    ],
-    "url": "https://data-journalism-26.github.io/final-project-maria_final/",
-    "repo": "https://github.com/data-journalism-26/final-project-maria_final",
-    "category": "america",
-    "tags": [
-      "food deserts",
-      "redlining",
-      "U.S.",
-      "Mapbox"
-    ],
-    "assignment": "final-project",
-    "editors_pick": false,
-    "thumbnail": "female-10.png",
-    "blurb": "Trace a redlining map from nearly a century ago and it still predicts where Americans struggle to buy fresh food today.",
-    "image": "thumbnails-visuals/maria-final.jpg"
+    "image": "thumbnails-visuals/elena-m-final.jpg",
+    "image_pano": "thumbnails-stories/elena-murray-final-pano.png",
+    "image_square": "thumbnails-stories/elena-murray-final-square.jpg"
   },
   {
     "id": "giorgio-db2",
@@ -421,9 +287,11 @@
     ],
     "assignment": "data-bit-2",
     "editors_pick": true,
-    "thumbnail": "male-1.png",
+    "thumbnail": "giorgio-coppola.png",
     "blurb": "A word born on the far-right fringe now echoes through Italy's parliament. Tracing its climb, one mention at a time.",
-    "image": "thumbnails-visuals/giorgio-db2.jpg"
+    "image": "thumbnails-visuals/giorgio-db2.jpg",
+    "image_pano": "thumbnails-stories/giorgio-coppola-db2-pano.jpg",
+    "image_square": "thumbnails-stories/giorgio-coppola-db2-square.jpg"
   },
   {
     "id": "elenaiva-db2",
@@ -441,11 +309,13 @@
       "conflict events",
       "scrollytelling"
     ],
-    "assignment": "data-bit-2",
+    "assignment": "data-bit-1",
     "editors_pick": true,
-    "thumbnail": "female-1.png",
+    "thumbnail": "elena-dreyer.png",
     "blurb": "Mapping how Russia tried to switch off Ukraine — strike by strike, substation by substation.",
-    "image": "thumbnails-visuals/elenaiva-db2.jpg"
+    "image": "thumbnails-visuals/elenaiva-db2.jpg",
+    "image_pano": "thumbnails-stories/elena-dreyer-db1-pano.png",
+    "image_square": "thumbnails-stories/elena-dreyer-db1-square.png"
   },
   {
     "id": "leticia-xiaohan-db2",
@@ -467,9 +337,11 @@
     ],
     "assignment": "data-bit-2",
     "editors_pick": true,
-    "thumbnail": "female-7.png",
+    "thumbnail": "leticia-figueiredo-collado.png",
     "blurb": "Follow Berlin's May Day route and you're really tracing forty years of who got priced out of the city.",
-    "image": "thumbnails-visuals/leticia-xiaohan-db2.jpg"
+    "image": "thumbnails-visuals/leticia-xiaohan-db2.jpg",
+    "image_pano": "thumbnails-stories/leticia-xiaohan-db2-pano.jpg",
+    "image_square": "thumbnails-stories/leticia-xiaohan-db2-square.jpg"
   },
   {
     "id": "luca-daniel-db1",
@@ -491,9 +363,11 @@
     ],
     "assignment": "data-bit-1",
     "editors_pick": true,
-    "thumbnail": "male-2.png",
+    "thumbnail": "luca-verona-vellage.png",
     "blurb": "An invisible kind of interference is spreading across the world's conflict zones. Mapping where the signal drops — and why.",
-    "image": "thumbnails-visuals/luca-daniel-db1.jpg"
+    "image": "thumbnails-visuals/luca-daniel-db1.jpg",
+    "image_pano": null,
+    "image_square": null
   },
   {
     "id": "leticia-xiaohan-db1",
@@ -514,9 +388,11 @@
     ],
     "assignment": "data-bit-1",
     "editors_pick": false,
-    "thumbnail": "female-7.png",
+    "thumbnail": "leticia-figueiredo-collado.png",
     "blurb": "Type in your Berlin neighbourhood and see how quickly the fire brigade would arrive — and how that stacks up against the rest of the city.",
-    "image": "thumbnails-visuals/leticia-xiaohan-db1.jpg"
+    "image": "thumbnails-visuals/leticia-xiaohan-db1.jpg",
+    "image_pano": "thumbnails-stories/leticia-xiaohan-db1-pano.jpg",
+    "image_square": "thumbnails-stories/leticia-xiaohan-db1-square.jpg"
   },
   {
     "id": "lou-db1",
@@ -536,9 +412,11 @@
     ],
     "assignment": "data-bit-1",
     "editors_pick": false,
-    "thumbnail": "female-4.png",
+    "thumbnail": "emma-lou-caressa.png",
     "blurb": "When a comedian lands in the headlines, what kind of fame lasts? A trip through the traffic spikes on Wikipedia.",
-    "image": "thumbnails-visuals/lou-db1.jpg"
+    "image": "thumbnails-visuals/lou-db1.jpg",
+    "image_pano": "thumbnails-stories/lou-caressa-db1-pano.jpeg",
+    "image_square": null
   },
   {
     "id": "sophia-db1",
@@ -558,30 +436,10 @@
     ],
     "assignment": "data-bit-1",
     "editors_pick": false,
-    "thumbnail": "female-2.png",
+    "thumbnail": "sophia-hiss.png",
     "blurb": "They're printed every week in Algeria's own military bulletins. You just have to know where to look.",
-    "image": "thumbnails-visuals/sophia-db1.jpg"
-  },
-  {
-    "id": "ashley-db2",
-    "title": "America's Silent Killer: Heat Deaths in the United States",
-    "subtitle": "The disaster that doesn't make the news",
-    "authors": [
-      "Ashley Razzo"
-    ],
-    "url": "https://data-journalism-26.github.io/data-bit-2-ashley-razo/",
-    "repo": "https://github.com/data-journalism-26/data-bit-2-ashley-razo",
-    "category": "america",
-    "tags": [
-      "heat deaths",
-      "U.S.",
-      "excess mortality",
-      "visualization"
-    ],
-    "assignment": "data-bit-2",
-    "editors_pick": false,
-    "thumbnail": "female-8.png",
-    "blurb": "Heat kills more Americans than hurricanes, floods, and tornadoes combined — but only if you count the deaths the official toll leaves out.",
-    "image": "thumbnails-visuals/ashley-db2.jpg"
+    "image": "thumbnails-visuals/sophia-db1.jpg",
+    "image_pano": "thumbnails-stories/sophia-hiss-db1-pano.jpg",
+    "image_square": "thumbnails-stories/sophia-hiss-db1-square.jpg"
   }
 ]
