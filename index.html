@@ -23,61 +23,21 @@
 </head>
 <body>
 
+  <div class="top-stripe" aria-hidden="true"></div>
+
   <!-- ── Masthead ── -->
   <header class="masthead" id="top">
-    <!-- Low-poly geometric background (aerial/satellite colour palette) -->
-    <svg class="masthead-bg" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 1200 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <!-- Row 1: top triangles -->
-      <polygon points="0,0 200,0 100,80"        fill="#1a3550"/>
-      <polygon points="200,0 100,80 300,65"     fill="#1e4d6e"/>
-      <polygon points="200,0 400,0 300,65"      fill="#0d3a4a"/>
-      <polygon points="400,0 300,65 500,90"     fill="#1e5874"/>
-      <polygon points="400,0 600,0 500,90"      fill="#164060"/>
-      <polygon points="600,0 500,90 700,70"     fill="#0e2a3e"/>
-      <polygon points="600,0 800,0 700,70"      fill="#1a3550"/>
-      <polygon points="800,0 700,70 900,85"     fill="#1e4d6e"/>
-      <polygon points="800,0 1000,0 900,85"     fill="#0d3a4a"/>
-      <polygon points="1000,0 900,85 1100,60"   fill="#254060"/>
-      <polygon points="1000,0 1200,0 1100,60"   fill="#1a3550"/>
-      <polygon points="1200,0 1100,60 1200,155" fill="#164060"/>
-      <!-- Row 2: middle triangles -->
-      <polygon points="0,0 100,80 0,155"           fill="#0e2a3e"/>
-      <polygon points="100,80 0,155 200,145"        fill="#1a4555"/>
-      <polygon points="100,80 300,65 200,145"       fill="#2a5568"/>
-      <polygon points="300,65 200,145 400,160"      fill="#1a3550"/>
-      <polygon points="300,65 500,90 400,160"       fill="#1e4d6e"/>
-      <polygon points="500,90 400,160 600,140"      fill="#0d3a4a"/>
-      <polygon points="500,90 700,70 600,140"       fill="#164060"/>
-      <polygon points="700,70 600,140 800,155"      fill="#1a5a6e"/>
-      <polygon points="700,70 900,85 800,155"       fill="#1a3550"/>
-      <polygon points="900,85 800,155 1000,145"     fill="#0e2a3e"/>
-      <polygon points="900,85 1100,60 1000,145"     fill="#2a5568"/>
-      <polygon points="1100,60 1000,145 1200,155"   fill="#254060"/>
-      <!-- Row 3: bottom fill -->
-      <polygon points="0,155 200,145 0,210"         fill="#0c1d2e"/>
-      <polygon points="200,145 0,210 200,210"        fill="#1a3550"/>
-      <polygon points="200,145 400,160 200,210"      fill="#0e2a3e"/>
-      <polygon points="400,160 200,210 400,210"      fill="#1e4d6e"/>
-      <polygon points="400,160 600,140 400,210"      fill="#1a4555"/>
-      <polygon points="600,140 400,210 600,210"      fill="#0d3a4a"/>
-      <polygon points="600,140 800,155 600,210"      fill="#164060"/>
-      <polygon points="800,155 600,210 800,210"      fill="#1a3550"/>
-      <polygon points="800,155 1000,145 800,210"     fill="#0c1d2e"/>
-      <polygon points="1000,145 800,210 1000,210"    fill="#2a5568"/>
-      <polygon points="1000,145 1200,155 1000,210"   fill="#1a3550"/>
-      <polygon points="1200,155 1000,210 1200,210"   fill="#1e4d6e"/>
-    </svg>
-
-    <div class="masthead-inner">
+    <div class="container">
       <div class="masthead-eyebrow">
         <span>Berlin</span>
         <span>Spring 2026</span>
         <span>Data Journalism</span>
       </div>
-      <hr class="rule rule--masthead">
-      <div class="masthead-name">The Hertie Times</div>
-      <hr class="rule rule--masthead rule--masthead-bold">
+      <h1 class="masthead-name">
+        <span class="mn-back" aria-hidden="true">The Hertie Times</span>
+        <span class="mn-front">The Hertie Times</span>
+      </h1>
+      <div class="masthead-slogan">Finest Data Journalism since 2026</div>
     </div>
   </header>
 
@@ -101,6 +61,19 @@
       </div>
     </section>
 
+    <!-- ── Support / independence strip ── -->
+    <section class="support-section">
+      <div class="container">
+        <div class="support-note">
+          <h2>Independent &amp; student-run</h2>
+          <p>
+            The Hertie Times is an independent project fueled by students of the Hertie School,
+            Berlin, and supported by Simon Munzert. <a href="#about">Read more about the project here →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ── Search band ── -->
     <div class="search-band">
       <div class="container">
@@ -118,14 +91,20 @@
       </div>
     </div>
 
-    <!-- ── Topic sections + sidebar — rendered by app.js ── -->
+    <!-- ── Topic sections — rendered by app.js ── -->
     <section class="topics-section">
       <div class="container">
-        <div class="topics-layout">
-          <div id="categories" class="topics-main"></div>
-          <aside class="topics-sidebar" id="short-takes-sidebar" aria-label="Short Takes"></aside>
-        </div>
+        <div id="categories"></div>
         <p id="no-results" class="no-results" hidden></p>
+      </div>
+    </section>
+
+    <!-- ── Authors — rendered by app.js ── -->
+    <section class="authors-section" id="authors">
+      <div class="container">
+        <h2 class="authors-heading">The Authors</h2>
+        <p class="authors-sub">The students behind The Hertie Times</p>
+        <div class="authors-grid" id="authors-grid"></div>
       </div>
     </section>
 

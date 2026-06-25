@@ -21,6 +21,17 @@ const CATEGORY_SHORT = {
   'berlin':            'Berlin',
 };
 
+// Graffiti accent colour per category
+const CATEGORY_ACCENT = {
+  'conflict':          '#ff2d8b',
+  'migration':         '#2ad4ff',
+  'public-opinion':    '#c6ff3a',
+  'domestic-politics': '#ff7a1a',
+  'economics':         '#b06bff',
+  'investigation':     '#ffe23d',
+  'berlin':            '#00e0a8',
+};
+
 const CATEGORY_ORDER = Object.keys(CATEGORY_LABELS);
 
 const ASSIGNMENT_LABELS = {
@@ -28,6 +39,25 @@ const ASSIGNMENT_LABELS = {
   'data-bit-1':    'Short Take',
   'data-bit-2':    'Short Take',
 };
+
+// Author → photo + programme. Programme is a placeholder pending real data.
+const AUTHORS = {
+  'Elena Dreyer':               { thumb: 'elena-dreyer.png',               programme: 'Class of 2026' },
+  'Giorgio Coppola':            { thumb: 'giorgio-coppola.png',            programme: 'Class of 2026' },
+  'Sophia Hiss':                { thumb: 'sophia-hiss.png',                programme: 'Class of 2026' },
+  'Luca Vellage':               { thumb: 'luca-verona-vellage.png',        programme: 'Class of 2026' },
+  'Chirag Ramesh':              { thumb: 'chirag-ramesh.png',              programme: 'Class of 2026' },
+  'Lou Caressa':                { thumb: 'emma-lou-caressa.png',           programme: 'Class of 2026' },
+  'Oliver Pollex':              { thumb: 'oliver-pollex.png',              programme: 'Class of 2026' },
+  'Aishwarya Sampath':          { thumb: 'aishwarya-sampath.png',          programme: 'Class of 2026' },
+  'Leticia Figueiredo Collado': { thumb: 'leticia-figueiredo-collado.png', programme: 'Class of 2026' },
+  'Xiaohan Wu':                 { thumb: 'xiaohan-wu.png',                 programme: 'Class of 2026' },
+  'Bjarne Schinzel':            { thumb: 'bjarne-schinzel.png',            programme: 'Class of 2026' },
+  'Elena Murray':               { thumb: 'elena-murray.png',               programme: 'Class of 2026' },
+  'Daniel Boppert':             { thumb: 'daniel-boppert.png',             programme: 'Class of 2026' },
+};
+
+const DEFAULT_ACCENT = '#ff2d8b';
 
 function esc(s) {
   return String(s)
@@ -38,16 +68,10 @@ function esc(s) {
 }
 
 function projectHref(p) { return p.url || p.repo; }
-
-function authorLine(authors) {
-  return authors.map(esc).join(' &amp; ');
-}
+function accentFor(cat) { return CATEGORY_ACCENT[cat] || DEFAULT_ACCENT; }
+function authorLine(authors) { return authors.map(esc).join(' &amp; '); }
 
 // ── Story images (big card slots) ─────────────────────────────────────────────
-// Prefer the panorama (3:2) for wide slots and the square (1:1) for square slots,
-// falling back across formats and finally to the generated visual. On a load
-// error, step through any remaining fallbacks, then show a plain dark fill.
-
 window.storyImgError = function (img) {
   const fb = (img.getAttribute('data-fb') || '').split('|').filter(Boolean);
   if (fb.length) {
@@ -71,30 +95,23 @@ function articleImgHTML(p, shape) {
 }
 
 // ── Author photos ─────────────────────────────────────────────────────────────
-// A provided headshot, otherwise a plain black circle (the thumb containers are
-// black, so a missing/broken image simply shows black).
-
 window.authorThumbBlack = function (img) {
   const span = document.createElement('span');
   span.className = img.className + ' is-black';
   img.replaceWith(span);
 };
 
-// Small circular author photo for bylines (picks + lead cards).
 function authorThumbHTML(p) {
   if (!p.thumbnail) return '<span class="byline-thumb is-black"></span>';
   return `<img class="byline-thumb" src="thumbnails-authors/${esc(p.thumbnail)}" alt="${esc(p.authors[0])}" loading="lazy" onerror="authorThumbBlack(this)">`;
 }
 
-// Inner <img> for the larger round thumbs (side cards + sidebar). The container
-// is black, so on error we just remove the image.
 function authorPhotoHTML(p) {
   if (!p.thumbnail) return '';
   return `<img src="thumbnails-authors/${esc(p.thumbnail)}" alt="${esc(p.authors[0])}" loading="lazy" onerror="this.remove()">`;
 }
 
 // ── Featured picks grid ───────────────────────────────────────────────────────
-// The whole card is clickable via a stretched cover-link overlay.
 
 function pickCardHTML(p, index) {
   const href      = esc(projectHref(p));
@@ -105,7 +122,7 @@ function pickCardHTML(p, index) {
   const showSub   = index === 0;
   const showBlurb = index < 3;
 
-  return `<article class="pick-card ${sizeClass}">
+  return `<article class="pick-card ${sizeClass}" style="--accent:${accentFor(p.category)}">
   <div class="card-image">${articleImgHTML(p, shape)}</div>
   <div class="card-body">
     <span class="card-section">${esc(catLabel)}</span>
@@ -121,7 +138,6 @@ function pickCardHTML(p, index) {
 
 function leadCardHTML(p) {
   const href = esc(projectHref(p));
-
   return `<article class="story-lead"
     data-title="${esc(p.title.toLowerCase())}"
     data-authors="${esc(p.authors.join(' ').toLowerCase())}">
@@ -137,7 +153,6 @@ function leadCardHTML(p) {
 function sideCardHTML(p) {
   const href        = esc(projectHref(p));
   const assignLabel = ASSIGNMENT_LABELS[p.assignment] || p.assignment;
-
   return `<article class="story-side"
     data-title="${esc(p.title.toLowerCase())}"
     data-authors="${esc(p.authors.join(' ').toLowerCase())}">
@@ -159,7 +174,7 @@ function renderCategorySection(key, list) {
     ? `<div class="story-rail">${sides.map(sideCardHTML).join('\n')}</div>`
     : '';
 
-  return `<section class="category-section" id="cat-${key}" data-category="${key}">
+  return `<section class="category-section" id="cat-${key}" data-category="${key}" style="--accent:${accentFor(key)}">
   <div class="cat-heading">
     <span class="cat-label">${label}</span>
     <span class="cat-rule" aria-hidden="true"></span>
@@ -172,32 +187,40 @@ function renderCategorySection(key, list) {
 </section>`;
 }
 
-// ── Sidebar (Short Takes) ─────────────────────────────────────────────────────
+// ── Authors ───────────────────────────────────────────────────────────────────
 
-function sidebarItemHTML(p) {
-  const href        = esc(projectHref(p));
-  const assignLabel = ASSIGNMENT_LABELS[p.assignment] || p.assignment;
+function buildAuthors(projects) {
+  const grid = document.getElementById('authors-grid');
+  if (!grid) return;
 
-  return `<a class="sidebar-item" href="${href}" target="_blank" rel="noopener noreferrer">
-  <div class="sidebar-thumb">${authorPhotoHTML(p)}</div>
-  <div class="sidebar-body">
-    <span class="sidebar-type">${esc(assignLabel)}</span>
-    <span class="sidebar-headline">${esc(p.title)}</span>
-    <span class="sidebar-byline">${authorLine(p.authors)}</span>
+  const byAuthor = new Map();
+  for (const p of projects) {
+    for (const name of p.authors) {
+      if (!byAuthor.has(name)) byAuthor.set(name, []);
+      byAuthor.get(name).push({ title: p.title, href: projectHref(p) });
+    }
+  }
+
+  const names = [...byAuthor.keys()].sort((a, b) => a.localeCompare(b));
+
+  grid.innerHTML = names.map(name => {
+    const meta  = AUTHORS[name] || {};
+    const prog  = meta.programme || 'Class of 2026';
+    const thumb = meta.thumb
+      ? `<img src="thumbnails-authors/${esc(meta.thumb)}" alt="${esc(name)}" loading="lazy" onerror="this.remove()">`
+      : '';
+    const pieces = byAuthor.get(name)
+      .map(pc => `<a href="${esc(pc.href)}" target="_blank" rel="noopener noreferrer">${esc(pc.title)}</a>`)
+      .join('');
+    return `<div class="author-card">
+  <div class="author-thumb">${thumb}</div>
+  <div class="author-info">
+    <div class="author-name">${esc(name)}</div>
+    <div class="author-prog">${esc(prog)}</div>
+    <div class="author-pieces">${pieces}</div>
   </div>
-</a>`;
-}
-
-function buildSidebar(projects) {
-  const sidebar = document.getElementById('short-takes-sidebar');
-  if (!sidebar) return;
-  const shortTakes = projects.filter(p => p.assignment !== 'final-project');
-  sidebar.innerHTML = `
-<div class="sidebar-header">
-  <span class="sidebar-label">Short Takes</span>
-  <p class="sidebar-desc">Quick reads, one idea each</p>
-</div>
-${shortTakes.map(sidebarItemHTML).join('\n')}`;
+</div>`;
+  }).join('\n');
 }
 
 // ── Sticky top nav ────────────────────────────────────────────────────────────
@@ -205,8 +228,6 @@ ${shortTakes.map(sidebarItemHTML).join('\n')}`;
 function buildNav(presentKeys) {
   const navLinks = document.getElementById('nav-links');
 
-  // Nav uses concise labels (the full names still appear as section
-  // headings) so all sections fit without horizontal scrolling.
   const links = [
     { label: 'Featured', href: '#featured' },
     ...presentKeys.map(key => ({
@@ -214,14 +235,14 @@ function buildNav(presentKeys) {
       href:  `#cat-${key}`,
       key,
     })),
-    { label: 'About', href: '#about' },
+    { label: 'Authors', href: '#authors' },
+    { label: 'About',   href: '#about' },
   ];
 
   navLinks.innerHTML = links
     .map(l => `<a class="nav-link" href="${l.href}"${l.key ? ` data-cat="${l.key}"` : ''}>${esc(l.label)}</a>`)
     .join('');
 
-  // Smooth scroll with nav-height offset
   navLinks.addEventListener('click', e => {
     const link = e.target.closest('.nav-link');
     if (!link) return;
@@ -233,10 +254,10 @@ function buildNav(presentKeys) {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 
-  // Active link highlighting
   const allAnchors = [
     document.getElementById('featured'),
     ...presentKeys.map(k => document.getElementById(`cat-${k}`)),
+    document.getElementById('authors'),
     document.getElementById('about'),
   ].filter(Boolean);
 
@@ -244,9 +265,7 @@ function buildNav(presentKeys) {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const id   = entry.target.id;
-      const href = (id === 'featured' || id === 'about')
-        ? `#${id}`
-        : `#cat-${entry.target.dataset.category}`;
+      const href = id.startsWith('cat-') ? `#${id}` : `#${id}`;
       navLinks.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
       const active = navLinks.querySelector(`[href="${href}"]`);
       if (active) active.classList.add('active');
@@ -278,9 +297,7 @@ function setupSearch() {
     }
 
     noResults.hidden = totalVisible > 0;
-    if (!noResults.hidden) {
-      noResults.textContent = `No stories match "${query}".`;
-    }
+    if (!noResults.hidden) noResults.textContent = `No stories match "${query}".`;
   }
 
   input.addEventListener('input', applyFilter);
@@ -290,25 +307,17 @@ function setupSearch() {
 // ── Main render ───────────────────────────────────────────────────────────────
 
 function render(projects) {
-  // Editor's picks (up to 9, indexed hero/md/sm)
   const picks = projects.filter(p => p.editors_pick).slice(0, 9);
   document.getElementById('picks-grid').innerHTML = picks.map(pickCardHTML).join('\n');
 
-  // Group by category in defined order
   const byCategory = {};
-  for (const p of projects) {
-    (byCategory[p.category] ??= []).push(p);
-  }
+  for (const p of projects) (byCategory[p.category] ??= []).push(p);
   const presentKeys = CATEGORY_ORDER.filter(k => byCategory[k]);
 
-  // Render category sections
   document.getElementById('categories').innerHTML =
     presentKeys.map(key => renderCategorySection(key, byCategory[key])).join('\n');
 
-  // Short Takes sidebar
-  buildSidebar(projects);
-
-  // Nav + search
+  buildAuthors(projects);
   buildNav(presentKeys);
   setupSearch();
 }
