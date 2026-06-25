@@ -41,12 +41,13 @@
       "scrollytelling"
     ],
     "assignment": "final-project",
-    "editors_pick": true,
+    "editors_pick": false,
     "thumbnail": "giorgio-coppola.png",
     "blurb": "A storm sweeps the Central Mediterranean just as the boats push off from Libya. The story of the night the sea turned, rebuilt hour by hour.",
     "image": "thumbnails-visuals/giorgio-final.jpg",
     "image_pano": "thumbnails-stories/giorgio-coppola-final-pano.jpg",
-    "image_square": "thumbnails-stories/giorgio-coppola-final-square.jpg"
+    "image_square": "thumbnails-stories/giorgio-coppola-final-square.jpg",
+    "lead": true
   },
   {
     "id": "sophia-final",
@@ -91,12 +92,13 @@
       "scrollytelling"
     ],
     "assignment": "final-project",
-    "editors_pick": true,
+    "editors_pick": false,
     "thumbnail": "luca-verona-vellage.png",
     "blurb": "After Russia shut its airspace, Europe's flights to Asia found a narrow new path through the Caucasus — shadowed by the GPS jamming that now follows them.",
     "image": "thumbnails-visuals/luca-final.jpg",
     "image_pano": null,
-    "image_square": null
+    "image_square": null,
+    "lead": true
   },
   {
     "id": "chirag-final",
@@ -140,7 +142,7 @@
       "explainer"
     ],
     "assignment": "final-project",
-    "editors_pick": false,
+    "editors_pick": true,
     "thumbnail": "emma-lou-caressa.png",
     "blurb": "Five things almost everyone gets wrong about election polls, cleared up with the numbers from Germany's last vote.",
     "image": "thumbnails-visuals/lou-final.jpg",
@@ -164,7 +166,7 @@
       "Germany"
     ],
     "assignment": "final-project",
-    "editors_pick": false,
+    "editors_pick": true,
     "thumbnail": "oliver-pollex.png",
     "blurb": "Seventy-five years of German politics told through the people in the room — their age, gender, faith, and where they came from.",
     "image": "thumbnails-visuals/oliver-final.jpg",
@@ -193,7 +195,8 @@
     "blurb": "A decade of journalists detained, sued, and silenced across Türkiye, plotted on a single map. The geography of a slow crackdown.",
     "image": "thumbnails-visuals/aishwarya-final.jpg",
     "image_pano": null,
-    "image_square": null
+    "image_square": null,
+    "lead": true
   },
   {
     "id": "leticia-xiaohan-final",
@@ -243,7 +246,8 @@
     "blurb": "Tuck cash under the mattress and time eats it alive. A scroll-driven essay on why money is such a bad place to store value.",
     "image": "thumbnails-visuals/bjarne-final.jpg",
     "image_pano": "thumbnails-stories/bjarne-schinzel-final-pano.png",
-    "image_square": "thumbnails-stories/bjarne-schinzel-final-square.png"
+    "image_square": "thumbnails-stories/bjarne-schinzel-final-square.png",
+    "lead": true
   },
   {
     "id": "elena-m-final",
@@ -286,12 +290,13 @@
       "text analysis"
     ],
     "assignment": "data-bit-2",
-    "editors_pick": true,
+    "editors_pick": false,
     "thumbnail": "giorgio-coppola.png",
     "blurb": "A word born on the far-right fringe now echoes through Italy's parliament. Tracing its climb, one mention at a time.",
     "image": "thumbnails-visuals/giorgio-db2.jpg",
     "image_pano": "thumbnails-stories/giorgio-coppola-db2-pano.jpg",
-    "image_square": "thumbnails-stories/giorgio-coppola-db2-square.jpg"
+    "image_square": "thumbnails-stories/giorgio-coppola-db2-square.jpg",
+    "lead": true
   },
   {
     "id": "elenaiva-db2",
@@ -310,7 +315,7 @@
       "scrollytelling"
     ],
     "assignment": "data-bit-1",
-    "editors_pick": true,
+    "editors_pick": false,
     "thumbnail": "elena-dreyer.png",
     "blurb": "Mapping how Russia tried to switch off Ukraine — strike by strike, substation by substation.",
     "image": "thumbnails-visuals/elenaiva-db2.jpg",
@@ -392,7 +397,8 @@
     "blurb": "Type in your Berlin neighbourhood and see how quickly the fire brigade would arrive — and how that stacks up against the rest of the city.",
     "image": "thumbnails-visuals/leticia-xiaohan-db1.jpg",
     "image_pano": "thumbnails-stories/leticia-xiaohan-db1-pano.jpg",
-    "image_square": "thumbnails-stories/leticia-xiaohan-db1-square.jpg"
+    "image_square": "thumbnails-stories/leticia-xiaohan-db1-square.jpg",
+    "lead": true
   },
   {
     "id": "lou-db1",
@@ -411,7 +417,7 @@
       "interactive"
     ],
     "assignment": "data-bit-1",
-    "editors_pick": false,
+    "editors_pick": true,
     "thumbnail": "emma-lou-caressa.png",
     "blurb": "When a comedian lands in the headlines, what kind of fame lasts? A trip through the traffic spikes on Wikipedia.",
     "image": "thumbnails-visuals/lou-db1.jpg",

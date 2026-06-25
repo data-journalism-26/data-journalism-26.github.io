@@ -40,22 +40,35 @@ const ASSIGNMENT_LABELS = {
   'data-bit-2':    'Short Take',
 };
 
-// Author → photo + programme. Programme is a placeholder pending real data.
+// Author → photo (in thumbnails-authors/)
 const AUTHORS = {
-  'Elena Dreyer':               { thumb: 'elena-dreyer.png',               programme: 'Class of 2026' },
-  'Giorgio Coppola':            { thumb: 'giorgio-coppola.png',            programme: 'Class of 2026' },
-  'Sophia Hiss':                { thumb: 'sophia-hiss.png',                programme: 'Class of 2026' },
-  'Luca Vellage':               { thumb: 'luca-verona-vellage.png',        programme: 'Class of 2026' },
-  'Chirag Ramesh':              { thumb: 'chirag-ramesh.png',              programme: 'Class of 2026' },
-  'Lou Caressa':                { thumb: 'emma-lou-caressa.png',           programme: 'Class of 2026' },
-  'Oliver Pollex':              { thumb: 'oliver-pollex.png',              programme: 'Class of 2026' },
-  'Aishwarya Sampath':          { thumb: 'aishwarya-sampath.png',          programme: 'Class of 2026' },
-  'Leticia Figueiredo Collado': { thumb: 'leticia-figueiredo-collado.png', programme: 'Class of 2026' },
-  'Xiaohan Wu':                 { thumb: 'xiaohan-wu.png',                 programme: 'Class of 2026' },
-  'Bjarne Schinzel':            { thumb: 'bjarne-schinzel.png',            programme: 'Class of 2026' },
-  'Elena Murray':               { thumb: 'elena-murray.png',               programme: 'Class of 2026' },
-  'Daniel Boppert':             { thumb: 'daniel-boppert.png',             programme: 'Class of 2026' },
+  'Elena Dreyer':               'elena-dreyer.png',
+  'Giorgio Coppola':            'giorgio-coppola.png',
+  'Sophia Hiss':                'sophia-hiss.png',
+  'Luca Vellage':               'luca-verona-vellage.png',
+  'Chirag Ramesh':              'chirag-ramesh.png',
+  'Lou Caressa':                'emma-lou-caressa.png',
+  'Oliver Pollex':              'oliver-pollex.png',
+  'Aishwarya Sampath':          'aishwarya-sampath.png',
+  'Leticia Figueiredo Collado': 'leticia-figueiredo-collado.png',
+  'Xiaohan Wu':                 'xiaohan-wu.png',
+  'Bjarne Schinzel':            'bjarne-schinzel.png',
+  'Elena Murray':               'elena-murray.png',
+  'Daniel Boppert':             'daniel-boppert.png',
 };
+
+// Curated featured grid: order controls hero (0), medium (1-2), small (3+).
+// None of these may also be a section lead (see `lead` flags in projects.json).
+const FEATURED_ORDER = [
+  'elenadreyer-final',    // hero — Elena Dreyer's radar story (headline)
+  'elena-m-final',        // medium — data centres
+  'sophia-final',         // medium — Algerian military
+  'leticia-xiaohan-db2',  // small — Berlin's First of May
+  'oliver-final',         // small — the changing face of parliament
+  'lou-final',            // small — don't trust the polls
+  'lou-db1',              // small — comedy scandals
+  'luca-daniel-db1',      // small — GPS interference
+];
 
 const DEFAULT_ACCENT = '#ff2d8b';
 
@@ -106,11 +119,6 @@ function authorThumbHTML(p) {
   return `<img class="byline-thumb" src="thumbnails-authors/${esc(p.thumbnail)}" alt="${esc(p.authors[0])}" loading="lazy" onerror="authorThumbBlack(this)">`;
 }
 
-function authorPhotoHTML(p) {
-  if (!p.thumbnail) return '';
-  return `<img src="thumbnails-authors/${esc(p.thumbnail)}" alt="${esc(p.authors[0])}" loading="lazy" onerror="this.remove()">`;
-}
-
 // ── Featured picks grid ───────────────────────────────────────────────────────
 
 function pickCardHTML(p, index) {
@@ -156,7 +164,7 @@ function sideCardHTML(p) {
   return `<article class="story-side"
     data-title="${esc(p.title.toLowerCase())}"
     data-authors="${esc(p.authors.join(' ').toLowerCase())}">
-  <div class="side-thumb">${authorPhotoHTML(p)}</div>
+  <div class="side-thumb">${articleImgHTML(p, 'square')}</div>
   <div class="side-body">
     <h4 class="card-headline"><a class="card-cover-link" href="${href}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a></h4>
     <p class="card-byline">${authorLine(p.authors)} · ${esc(assignLabel)}</p>
@@ -204,10 +212,9 @@ function buildAuthors(projects) {
   const names = [...byAuthor.keys()].sort((a, b) => a.localeCompare(b));
 
   grid.innerHTML = names.map(name => {
-    const meta  = AUTHORS[name] || {};
-    const prog  = meta.programme || 'Class of 2026';
-    const thumb = meta.thumb
-      ? `<img src="thumbnails-authors/${esc(meta.thumb)}" alt="${esc(name)}" loading="lazy" onerror="this.remove()">`
+    const file  = AUTHORS[name];
+    const thumb = file
+      ? `<img src="thumbnails-authors/${esc(file)}" alt="${esc(name)}" loading="lazy" onerror="this.remove()">`
       : '';
     const pieces = byAuthor.get(name)
       .map(pc => `<a href="${esc(pc.href)}" target="_blank" rel="noopener noreferrer">${esc(pc.title)}</a>`)
@@ -216,7 +223,6 @@ function buildAuthors(projects) {
   <div class="author-thumb">${thumb}</div>
   <div class="author-info">
     <div class="author-name">${esc(name)}</div>
-    <div class="author-prog">${esc(prog)}</div>
     <div class="author-pieces">${pieces}</div>
   </div>
 </div>`;
@@ -307,7 +313,8 @@ function setupSearch() {
 // ── Main render ───────────────────────────────────────────────────────────────
 
 function render(projects) {
-  const picks = projects.filter(p => p.editors_pick).slice(0, 9);
+  const byId  = Object.fromEntries(projects.map(p => [p.id, p]));
+  const picks = FEATURED_ORDER.map(id => byId[id]).filter(Boolean);
   document.getElementById('picks-grid').innerHTML = picks.map(pickCardHTML).join('\n');
 
   const byCategory = {};
