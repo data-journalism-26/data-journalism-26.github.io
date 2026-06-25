@@ -53,7 +53,7 @@ const AUTHORS = {
   'Bjarne Schinzel':            'bjarne-schinzel.png',
   'Elena Murray':               'elena-murray.png',
   'Daniel Boppert':             'daniel-boppert.png',
-  'Farhan Shaik':               'farhan-shaik.png',
+  'Farhan Shaikh':              'farhan-shaik.png',
   'Ujwal Neethipudi':           'ujwal-neethipudi.png',
 };
 
