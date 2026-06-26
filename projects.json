@@ -298,30 +298,6 @@
     "lead": true
   },
   {
-    "id": "elenaiva-db2",
-    "title": "Russia's Systematic Targeting of Ukraine's Power Grid",
-    "subtitle": "Seven waves against one grid",
-    "authors": [
-      "Elena Dreyer"
-    ],
-    "url": "https://data-journalism-26.github.io/data-bit-2-elenaiva/",
-    "repo": "https://github.com/data-journalism-26/data-bit-2-elenaiva",
-    "category": "conflict",
-    "tags": [
-      "Ukraine",
-      "energy",
-      "conflict events",
-      "scrollytelling"
-    ],
-    "assignment": "data-bit-1",
-    "editors_pick": false,
-    "thumbnail": "elena-dreyer.png",
-    "blurb": "Mapping how Russia tried to switch off Ukraine — strike by strike, substation by substation.",
-    "image": "thumbnails-visuals/elenaiva-db2.jpg",
-    "image_pano": "thumbnails-stories/elena-dreyer-db1-pano.png",
-    "image_square": "thumbnails-stories/elena-dreyer-db1-square.png"
-  },
-  {
     "id": "elenaiva-db1",
     "title": "Neue Kaufprämie und Spritpreis-Schock: Kommt jetzt der E-Auto-Boom? (German)",
     "subtitle": "Germany's EV registrations overtake petrol for the first time",
