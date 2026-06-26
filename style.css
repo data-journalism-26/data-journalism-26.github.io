@@ -72,7 +72,10 @@ img { display: block; max-width: 100%; }
 }
 .masthead-name .mn-back {
   position: absolute;
-  left: 4px; top: 4px;
+  top: 4px;
+  left: 0; width: 100%;
+  text-align: center;
+  transform: translateX(4px);
   color: var(--pink);
   z-index: 0;
 }
