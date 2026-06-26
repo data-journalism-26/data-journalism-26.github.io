@@ -1,4 +1,4 @@
-# The Hertie Times
+# The Data Dispatch
 
 A student data journalism showcase built for **GRAD-E1493: Data Journalism** at the Hertie School, Berlin (Spring 2026), taught by Prof. Simon Munzert.
 

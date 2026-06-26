@@ -95,7 +95,7 @@ Review the site for:
 3. Categories: Make sure every category features at least 2 articles. Reduce overall number of categories. One category should be on Berlin (e.g. for the firefighter and the may 1st pieces), another one on geographic deep dives into America ("Oh, America"), featuring food deserts, the native Americans piece, the data centers piece and others who focus on the US
 4. The page loads fast (no heavy dependencies, images are lazy-loaded).
 5. For each category, feature one piece more prominently and the others as smaller thumbnails. Also, consider using two 
-6. Add an Open Graph meta tag so the page previews nicely when shared on social media. Title: "The Hertie Times". Description: "Student projects from the Data Journalism course at the Hertie School, Berlin."
+6. Add an Open Graph meta tag so the page previews nicely when shared on social media. Title: "The Data Dispatch". Description: "Student projects from the Data Journalism course at the Hertie School, Berlin."
 7. Author names (e.g., Daniel Boppert, not Thiele)
 8. Use author thumbnails. I added a few in the thumbnails folder. Assign them randomly.
 9. Use of colors and other design features. Make the Title more colorful with background colors. Also, try to integrate a unique style. I like low-poly and areal designs with a reduced but aestethic color palette.
