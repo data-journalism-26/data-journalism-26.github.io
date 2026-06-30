@@ -170,8 +170,8 @@
     "thumbnail": "oliver-pollex.png",
     "blurb": "Seventy-five years of German politics told through the people in the room — their age, gender, faith, and where they came from.",
     "image": "thumbnails-visuals/oliver-final.jpg",
-    "image_pano": null,
-    "image_square": null
+    "image_pano": "thumbnails-stories/oliver-final-pano.jpg",
+    "image_square": "thumbnails-stories/oliver-final-square.jpg"
   },
   {
     "id": "aishwarya-final",
@@ -489,8 +489,8 @@
     "editors_pick": false,
     "thumbnail": "oliver-pollex.png",
     "blurb": "An experiment across 10 countries and 150,000 judgments finds that your opinion on a topic predicts how you'd moderate it — far more than who you are.",
-    "image_pano": null,
-    "image_square": null,
+    "image_pano": "thumbnails-stories/oliver-db1-pano.jpg",
+    "image_square": "thumbnails-stories/oliver-db1-square.jpg",
     "image": null
   },
   {
@@ -514,8 +514,8 @@
     "editors_pick": false,
     "thumbnail": "oliver-pollex.png",
     "blurb": "As Germany looks to hedge against Washington, India keeps surfacing in parliament. The case for an Indo-German defence partnership, traced through 25 years of Bundestag debate.",
-    "image_pano": null,
-    "image_square": null,
+    "image_pano": "thumbnails-stories/oliver-db2-pano.jpg",
+    "image_square": "thumbnails-stories/oliver-db2-square.jpg",
     "image": null
   },
   {
